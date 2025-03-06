@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/*body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -10,9 +10,19 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+}*/
 
 @layer base {
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
   :root {
     --background: linear-gradient(135deg, hsl(190, 45%, 76%), hsl(280, 65%, 60%));
     --foreground: 0 0% 3.9%;
