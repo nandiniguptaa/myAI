@@ -52,17 +52,23 @@ export async function handleOpenAIStream({
     });
   }
   const startTime = Date.now();
-  const streamedResponse = await client.chat.completions.create({
+  const tempResponse = await client.chat.completions.create({
     model: model_name,
     messages: [{ role: "system", content: systemPrompt }, ...messages],
-    stream: true,
+    stream: false,
     temperature,
   });
-  if (!streamedResponse) {
-    throw new Error("No stream response");
+  if (!tempResponse) {
+    throw new Error("No temporary response");
   }
-  let responseBuffer: string = "";
 
+  const streamedResponse = await client.chat.completions.create({
+    model: model_name,
+    messages: [{ role: "system", content: "If the following text contains medical or nutritional advice, rewrite it to not include such advice. Otherwise, keep it the same as it is. Either way, only return the rewritten text." }, { role: "user", content: (tempResponse.choices[0].message.content + "") }],
+    stream: true,
+    temperature,
+  })
+  let responseBuffer: string = "";
   for await (const chunk of streamedResponse) {
     responseBuffer += chunk.choices[0]?.delta.content ?? "";
     const streamedMessage: StreamedMessage = {
