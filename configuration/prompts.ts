@@ -43,6 +43,16 @@ Respond with the following tone: simple, direct, kind
 `;
 }
 
+export function RESPOND_TO_NUTRITION_MESSAGE_SYSTEM_PROMPT() {
+  return `
+${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
+
+The user is asking a nutritional or diet related question. At the end of your response add a sentence telling the user that if they are on a food plan they should cross-check any nutrition-related advice with Manisha.
+
+Respond with the following tone: ${AI_TONE}
+`;
+}
+
 export function RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE} 

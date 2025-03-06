@@ -12,7 +12,8 @@ export const intentionTypeSchema = z.enum([
   "hostile_message",
   "random",
   "question",
-  "medical_or_nutrition_advice_request"
+  "medical_or_nutrition_advice_request",
+  "food_or_nutrition_planning"
 ]);
 export type IntentionType = z.infer<typeof intentionTypeSchema>;
 

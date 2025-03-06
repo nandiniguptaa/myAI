@@ -7,6 +7,10 @@ export const MEDICAL_RESPONSE_PROVIDER: ProviderName = "openai";
 export const MEDICAL_RESPONSE_MODEL: string = "gpt-4o-mini";
 export const MEDICAL_RESPONSE_TEMPERATURE: number = 0.5;
 
+export const NUTRITION_RESPONSE_PROVIDER: ProviderName = "openai";
+export const NUTRITION_RESPONSE_MODEL: string = "gpt-4o-mini";
+export const NUTRITION_RESPONSE_TEMPERATURE: number = 0.7;
+
 export const RANDOM_RESPONSE_PROVIDER: ProviderName = "openai";
 export const RANDOM_RESPONSE_MODEL: string = "gpt-4o-mini";
 export const RANDOM_RESPONSE_TEMPERATURE: number = 0.7;
