@@ -61,6 +61,8 @@ export async function POST(req: Request) {
     return ResponseModule.respondToQuestion(chat, providers, pineconeIndex);
   } else if (intention.type === "hostile_message") {
     return ResponseModule.respondToHostileMessage(chat, providers);
+  } else if(intention.type === "medical_or_nutrition_advice_request") {
+    return ResponseModule.respondToMedicalMessage(chat, providers);
   } else {
     return ResponseModule.respondToRandomMessage(chat, providers);
   }

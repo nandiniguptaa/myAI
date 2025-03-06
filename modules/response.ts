@@ -32,8 +32,11 @@ import {
   RESPOND_TO_QUESTION_BACKUP_SYSTEM_PROMPT,
   RESPOND_TO_QUESTION_SYSTEM_PROMPT,
   RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT,
+  RESPOND_TO_MEDICAL_MESSAGE_SYSTEM_PROMPT,
 } from "@/configuration/prompts";
 import {
+  MEDICAL_RESPONSE_PROVIDER,
+  MEDICAL_RESPONSE_MODEL,
   RANDOM_RESPONSE_PROVIDER,
   RANDOM_RESPONSE_MODEL,
   HOSTILE_RESPONSE_PROVIDER,
@@ -43,6 +46,7 @@ import {
   HOSTILE_RESPONSE_TEMPERATURE,
   QUESTION_RESPONSE_TEMPERATURE,
   RANDOM_RESPONSE_TEMPERATURE,
+  MEDICAL_RESPONSE_TEMPERATURE,
 } from "@/configuration/models";
 
 /**
@@ -82,6 +86,52 @@ export class ResponseModule {
           citations,
           error_message: DEFAULT_RESPONSE_MESSAGE,
           temperature: RANDOM_RESPONSE_TEMPERATURE,
+        });
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  }
+
+  static async respondToMedicalMessage(
+    chat: Chat,
+    providers: AIProviders
+  ): Promise<Response> {
+    /**
+     * Respond to the user when they send a RANDOM message
+     */
+    const PROVIDER_NAME: ProviderName = MEDICAL_RESPONSE_PROVIDER;
+    const MODEL_NAME: string = MEDICAL_RESPONSE_MODEL;
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        queueIndicator({
+          controller,
+          status: "Coming up with an answer",
+          icon: "thinking",
+        });
+        const systemPrompt = RESPOND_TO_MEDICAL_MESSAGE_SYSTEM_PROMPT();
+        const mostRecentMessages: CoreMessage[] = await convertToCoreMessages(
+          stripMessagesOfCitations(chat.messages.slice(-HISTORY_CONTEXT_LENGTH))
+        );
+
+        const citations: Citation[] = [];
+        queueAssistantResponse({
+          controller,
+          providers,
+          providerName: PROVIDER_NAME,
+          messages: mostRecentMessages,
+          model_name: MODEL_NAME,
+          systemPrompt,
+          citations,
+          error_message: DEFAULT_RESPONSE_MESSAGE,
+          temperature: MEDICAL_RESPONSE_TEMPERATURE,
         });
       },
     });

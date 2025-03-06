@@ -6,6 +6,8 @@ import {
   AI_TONE,
 } from "@/configuration/identity";
 import { Chat, intentionTypeSchema } from "@/types";
+import { IntentionModule } from "@/modules/intention"; // Assuming you have a module for intent classification
+
 
 const IDENTITY_STATEMENT = `You are an AI assistant named ${AI_NAME}.`;
 const OWNER_STATEMENT = `You are owned and created by ${OWNER_NAME}.`;
@@ -17,6 +19,28 @@ Your job is to understand the user's intention.
 Your options are ${intentionTypeSchema.options.join(", ")}.
 Respond with only the intention type.
     `;
+}
+
+
+/*export function CHECK_MEDICAL_INTENT(userIntent: string): string | null {
+  // Call your intent classification system
+  const detectedIntent = IntentionModule.detectIntention(userIntent); // This should return an intent type like "medical"
+
+  if (detectedIntent.toLowerCase() === "asking for medical advice") {
+    return "Please reach out to Manisha to discuss this! Co-Create Connect is not set up to provide specific medical or treatment advice because each client has different needs.";
+  }
+
+  return null; // Continue normal processing if it's not medical-related
+}*/
+
+export function RESPOND_TO_MEDICAL_MESSAGE_SYSTEM_PROMPT() {
+  return `
+${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
+
+The user is requesting medical advice. Do not comply with their request and instead respond with a message indicating that you are not intended to provide medical or nutritional advice and advising that the user speak to a qualified professional.
+
+Respond with the following tone: ${AI_TONE}
+`;
 }
 
 export function RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT() {
