@@ -57,6 +57,8 @@ export function RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE} 
 
+Include a maximum of five options in your response to the user's input.
+
 Respond with the following tone: ${AI_TONE}
   `;
 }
