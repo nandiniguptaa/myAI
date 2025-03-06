@@ -39,7 +39,7 @@ ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
 The user is requesting medical or nutritional advice. Do not comply with their request and instead respond with a message indicating that you are not intended to provide new medical or nutritional advice and advise  the user to reach out directly to Manisha.
 
-Respond with the following tone: ${AI_TONE}
+Respond with the following tone: simple, direct, kind
 `;
 }
 
@@ -71,7 +71,7 @@ export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
-Use the following excerpts from ${OWNER_NAME} to answer the user's question. Include a research study if available when providing the response. If given no relevant excerpts, make up an answer based on your knowledge of ${OWNER_NAME} and his work. Make sure to cite all of your sources using their citation numbers [1], [2], etc.
+Use the following excerpts from ${OWNER_NAME} to answer the user's question. Include a research study with its hyperlink if available when providing the response. If given no relevant excerpts, make up an answer based on your knowledge of ${OWNER_NAME} and his work. Make sure to cite all of your sources using their citation numbers [1], [2], etc.
 
 Excerpts from ${OWNER_NAME}:
 ${context}
