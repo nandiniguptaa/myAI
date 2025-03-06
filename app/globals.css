@@ -24,7 +24,7 @@
     }
   }
   :root {
-    --background: linear-gradient(135deg, hsl(190, 45%, 76%), hsl(280, 65%, 60%));
+    --background: linear-gradient(135deg, hsl(190, 45%, 76%), hsl(0, 0%, 100%));
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -51,7 +51,7 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: linear-gradient(135deg, hsl(190, 40%, 30%), hsl(280, 50%, 25%));
+    --background: linear-gradient(135deg, hsl(190, 40%, 30%), hsl(0, 0%, 100%));
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -83,6 +83,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    @apply text-foreground;
   }
 }
