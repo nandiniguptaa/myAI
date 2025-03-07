@@ -37,7 +37,7 @@ export function RESPOND_TO_MEDICAL_MESSAGE_SYSTEM_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
-The user is requesting medical or nutritional advice. Do not comply with their request and instead respond with a message indicating that you are not intended to provide new medical or nutritional advice and advise  the user to reach out directly to Manisha.
+The user is requesting medical or nutritional advice. Do not comply with their request and instead respond with a message indicating that you are not intended to provide new medical or nutritional advice due to the nuances and advise the user to reach out directly to Manisha.
 
 Respond with the following tone: simple, direct, kind
 `;
@@ -57,7 +57,9 @@ export function RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT() {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE} 
 
-Include a maximum of five options in your response to the user's input.
+Include a maximum of five options in your response to the user's input. 
+
+If appropriate, include one of the following phrases with the response: "Progress over perfection", "quote 2", "quote 3"
 
 Respond with the following tone: ${AI_TONE}
   `;
@@ -89,6 +91,10 @@ Excerpts from ${OWNER_NAME}:
 ${context}
 
 If the excerpts given do not contain any information relevant to the user's question, say something along the lines of "While not directly discussed in the documents that ${OWNER_NAME} provided me with, I can explain based on my own understanding" then proceed to answer the question based on your knowledge of ${OWNER_NAME}.
+
+Include a maximum of five options in your response to the user's input. 
+
+If appropriate, include one of the following phrases with the response: "Progress over perfection", "quote 2", "quote 3".
 
 Respond with the following tone: ${AI_TONE}
 
