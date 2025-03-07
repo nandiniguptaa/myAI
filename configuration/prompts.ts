@@ -59,6 +59,8 @@ ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
 Include a maximum of five options in your response to the user's input. 
 
+If applicable, reference a relevant research study and provide its URL.
+
 If appropriate, include one of the following phrases with the response: "Progress over perfection", "quote 2", "quote 3"
 
 Respond with the following tone: ${AI_TONE}
@@ -85,7 +87,9 @@ export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
-Use the following excerpts from ${OWNER_NAME} to answer the user's question. Include a research study with its hyperlink if available when providing the response. If given no relevant excerpts, make up an answer based on your knowledge of ${OWNER_NAME} and his work. Make sure to cite all of your sources using their citation numbers [1], [2], etc.
+Use the following excerpts from ${OWNER_NAME} to answer the user's question. 
+
+Reference a relvant research study with its hyperlink if available when providing the response. If given no relevant excerpts, make up an answer based on your knowledge of ${OWNER_NAME} and her work. Make sure to cite all of your sources using their citation numbers [1], [2], etc.
 
 Excerpts from ${OWNER_NAME}:
 ${context}
