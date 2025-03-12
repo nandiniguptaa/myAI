@@ -64,7 +64,7 @@ export async function handleOpenAIStream({
 
   const streamedResponse = await client.chat.completions.create({
     model: model_name,
-    messages: [{ role: "system", content: "If the following text contains medical or nutritional advice, rewrite it to not include such advice. Otherwise, keep it the same as it is. Either way, only return the rewritten text. Please make sure to include at least one cited source in your response." }, { role: "user", content: (tempResponse.choices[0].message.content + "") }],
+    messages: [{ role: "system", content: "If the following text contains medical or nutritional advice, rewrite it to not include such advice. Otherwise, keep it the same as it is. Either way, only return the rewritten text." }, { role: "user", content: (tempResponse.choices[0].message.content + "") }],
     stream: true,
     temperature,
   })
