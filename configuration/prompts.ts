@@ -84,6 +84,8 @@ Respond with the following tone: ${AI_TONE}
 }
 
 export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
+  console.log("Context received in RESPOND_TO_QUESTION_SYSTEM_PROMPT:", context); // Debugging statement
+
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
@@ -105,6 +107,7 @@ Example citation format:
 If appropriate, include one of the following phrases with the response: "Progress over perfection", "Small consistent steps lead to big changes".
 
 Respond with the following tone: ${AI_TONE}
+
 
 Now respond to the user's message:
 `;
