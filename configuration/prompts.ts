@@ -111,13 +111,12 @@ export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 
+Use the following excerpts from ${OWNER_NAME}'s resources to answer the user's question. The resources contain documents written by Manisha and scholarly articles that provide background to ground your responses in. If the excerpts contain links, share them directly with the user. Format links like this: [Link Text](URL
 
-Answer the users question using the given context. The context has documents written by Manisha and scholarly articles that provide background to ground your responses in. Always try to include context in your response. 
+Excerpts from ${OWNER_NAME}:
+${context}
 
-Always use the source link of each context document to cite information that you use in your response. You can cite multiple sources if multiple contexts were used. Format the citation as [source_description](source_link).
-
-**Retrieved Excerpts**:
-  ${context ? context : "No relevant excerpts found."}
+If no relevant exerpts are found, inform the user and use your general knowledge to provide a response. If you find any relevant online resources, share their links as well.
 
 If appropriate, include one of the following phrases with the response: "Progress over perfection", "Small consistent steps lead to big changes".
 
