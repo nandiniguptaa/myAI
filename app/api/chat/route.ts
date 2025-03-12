@@ -65,6 +65,10 @@ export async function POST(req: Request) {
     return ResponseModule.respondToMedicalMessage(chat, providers);
   } else if(intention.type === "food_or_nutrition_planning") {
     return ResponseModule.respondToNutritionMessage(chat, providers);
+  } else if(intention.type === "exercise_regiment_request") {
+    return ResponseModule.respondToExerciseMessage(chat, providers);
+  } else if(intention.type === "labwork_question") {
+    return ResponseModule.respondToLabworkMessage(chat, providers);
   } else {
     return ResponseModule.respondToRandomMessage(chat, providers);
   }

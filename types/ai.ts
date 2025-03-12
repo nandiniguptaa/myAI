@@ -13,7 +13,9 @@ export const intentionTypeSchema = z.enum([
   "random",
   "question",
   "medical_or_nutrition_advice_request",
-  "food_or_nutrition_planning"
+  "food_or_nutrition_planning",
+  "exercise_regiment_request",
+  "labwork_question"
 ]);
 export type IntentionType = z.infer<typeof intentionTypeSchema>;
 

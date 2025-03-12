@@ -34,6 +34,8 @@ import {
   RESPOND_TO_RANDOM_MESSAGE_SYSTEM_PROMPT,
   RESPOND_TO_MEDICAL_MESSAGE_SYSTEM_PROMPT,
   RESPOND_TO_NUTRITION_MESSAGE_SYSTEM_PROMPT,
+  RESPOND_TO_LABWORK_MESSAGE_SYSTEM_PROMPT,
+  RESPOND_TO_EXERCISE_MESSAGE_SYSTEM_PROMPT,
 } from "@/configuration/prompts";
 import {
   MEDICAL_RESPONSE_PROVIDER,
@@ -51,6 +53,12 @@ import {
   NUTRITION_RESPONSE_PROVIDER,
   NUTRITION_RESPONSE_MODEL,
   NUTRITION_RESPONSE_TEMPERATURE,
+  LABWORK_RESPONSE_PROVIDER,
+  LABWORK_RESPONSE_MODEL,
+  LABWORK_RESPONSE_TEMPERATURE,
+  EXERCISE_RESPONSE_PROVIDER,
+  EXERCISE_RESPONSE_MODEL,
+  EXERCISE_RESPONSE_TEMPERATURE,
 } from "@/configuration/models";
 
 /**
@@ -182,6 +190,98 @@ export class ResponseModule {
           citations,
           error_message: DEFAULT_RESPONSE_MESSAGE,
           temperature: NUTRITION_RESPONSE_TEMPERATURE,
+        });
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  }
+
+  static async respondToLabworkMessage(
+    chat: Chat,
+    providers: AIProviders
+  ): Promise<Response> {
+    /**
+     * Respond to the user when they send a RANDOM message
+     */
+    const PROVIDER_NAME: ProviderName = LABWORK_RESPONSE_PROVIDER;
+    const MODEL_NAME: string = LABWORK_RESPONSE_MODEL;
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        queueIndicator({
+          controller,
+          status: "Coming up with an answer",
+          icon: "thinking",
+        });
+        const systemPrompt = RESPOND_TO_LABWORK_MESSAGE_SYSTEM_PROMPT();
+        const mostRecentMessages: CoreMessage[] = await convertToCoreMessages(
+          stripMessagesOfCitations(chat.messages.slice(-HISTORY_CONTEXT_LENGTH))
+        );
+
+        const citations: Citation[] = [];
+        queueAssistantResponse({
+          controller,
+          providers,
+          providerName: PROVIDER_NAME,
+          messages: mostRecentMessages,
+          model_name: MODEL_NAME,
+          systemPrompt,
+          citations,
+          error_message: DEFAULT_RESPONSE_MESSAGE,
+          temperature: LABWORK_RESPONSE_TEMPERATURE,
+        });
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  }
+
+  static async respondToExerciseMessage(
+    chat: Chat,
+    providers: AIProviders
+  ): Promise<Response> {
+    /**
+     * Respond to the user when they send a RANDOM message
+     */
+    const PROVIDER_NAME: ProviderName = EXERCISE_RESPONSE_PROVIDER;
+    const MODEL_NAME: string = EXERCISE_RESPONSE_MODEL;
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        queueIndicator({
+          controller,
+          status: "Coming up with an answer",
+          icon: "thinking",
+        });
+        const systemPrompt = RESPOND_TO_EXERCISE_MESSAGE_SYSTEM_PROMPT();
+        const mostRecentMessages: CoreMessage[] = await convertToCoreMessages(
+          stripMessagesOfCitations(chat.messages.slice(-HISTORY_CONTEXT_LENGTH))
+        );
+
+        const citations: Citation[] = [];
+        queueAssistantResponse({
+          controller,
+          providers,
+          providerName: PROVIDER_NAME,
+          messages: mostRecentMessages,
+          model_name: MODEL_NAME,
+          systemPrompt,
+          citations,
+          error_message: DEFAULT_RESPONSE_MESSAGE,
+          temperature: EXERCISE_RESPONSE_TEMPERATURE,
         });
       },
     });
