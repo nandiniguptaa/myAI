@@ -85,6 +85,8 @@ Respond with the following tone: ${AI_TONE}
 
 export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
   console.log("Context received in RESPOND_TO_QUESTION_SYSTEM_PROMPT:", context); // Debugging statement
+  console.log("testing!");
+
 
   return `
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
