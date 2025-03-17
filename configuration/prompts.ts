@@ -143,8 +143,7 @@ export function HYDE_PROMPT(chat: Chat) {
   const mostRecentMessages = chat.messages.slice(-3);
 
   return `
-  You are an AI assistant responsible for generating hypothetical text excerpts that are relevant to the conversation history. You're given the conversation history. Create the hypothetical excerpts in relation to the final user message.
-
+  You are an AI assistant dedicated to supporting Manisha's clients responsible for generating hypothetical text excerpts and suggestions that can help them stay on track and motivated with their health coaching program. Use the conversation history to create empathetic, useful responses for the user.
   Conversation history:
   ${mostRecentMessages
     .map((message) => `${message.role}: ${message.content}`)
