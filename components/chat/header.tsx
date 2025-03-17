@@ -3,6 +3,7 @@ import { EraserIcon } from "lucide-react";
 import Image from "next/image";
 import { CHAT_HEADER, CLEAR_BUTTON_TEXT } from "@/configuration/ui";
 import { AI_NAME } from "@/configuration/identity";
+import RedirectButton from "@/components/chat/RedirectButton"; 
 
 export const AILogo = () => (
   <div className="w-12 h-12 relative">
@@ -25,6 +26,7 @@ export default function ChatHeader({
           <p>{CHAT_HEADER}</p>
         </div>
         <div className="flex-0 w-[100px] flex justify-end items-center">
+          {/* Clear Chat History Button */}
           <Button
             onClick={clearMessages}
             className="gap-2 shadow-sm"
@@ -34,6 +36,10 @@ export default function ChatHeader({
             <EraserIcon className="w-4 h-4" />
             <span>{CLEAR_BUTTON_TEXT}</span>
           </Button>
+
+          {/* ✅ Redirect Button - Next to "Clear Chat History" */}
+          <RedirectButton url="https://l.bttr.to/rAyYN" label="Schedule a Coaching Session" variant="outline" />
+        
         </div>
       </div>
     </div>
