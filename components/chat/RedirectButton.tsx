@@ -1,23 +1,25 @@
 "use client";
 
-import { Button } from "@/components/ui/button"; // Import the existing styled button
+import { Button } from "@/components/ui/button";
 
 interface RedirectButtonProps {
   url: string;
   label: string;
-  variant?: "default" | "outline" | "secondary" | "ghost" | "link"; // Use existing variants
+  variant?: "default" | "outline" | "secondary" | "ghost";
   className?: string;
+  style?: React.CSSProperties; // ✅ Fix: Explicitly define the style prop
 }
 
-export default function RedirectButton({ url, label, variant = "default", className }: RedirectButtonProps) {
+export default function RedirectButton({ url, label, variant = "default", className, style }: RedirectButtonProps) {
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <Button variant={variant} size = "sm" className={className}>
+      <Button variant={variant} size="sm" className={className} style={style}>
         {label}
       </Button>
     </a>
   );
 }
+
 
 
 /*
