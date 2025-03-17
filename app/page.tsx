@@ -25,12 +25,6 @@ export default function Chat() {
         <div className="flex flex-col max-w-screen-lg w-full h-full p-5">
           <ChatMessages messages={messages} indicatorState={indicatorState} />
         </div>
-
-          {/* Added Redirect Button Below Chat Messages */}
-          
-        <div className="mt-6">
-          <RedirectButton url="https://l.bttr.to/rAyYN" label="Schedule a Coaching Session" variant="default" />
-        </div>
       </div>
 
       <ChatInput

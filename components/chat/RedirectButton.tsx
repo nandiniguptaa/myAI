@@ -6,12 +6,13 @@ interface RedirectButtonProps {
   url: string;
   label: string;
   variant?: "default" | "outline" | "secondary" | "ghost" | "link"; // Use existing variants
+  className?: string;
 }
 
-export default function RedirectButton({ url, label, variant = "default" }: RedirectButtonProps) {
+export default function RedirectButton({ url, label, variant = "default", className }: RedirectButtonProps) {
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <Button variant={variant}>
+      <Button variant={variant} size = "sm" className={className}>
         {label}
       </Button>
     </a>
