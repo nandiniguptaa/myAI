@@ -97,8 +97,8 @@ export default function ChatHeader({
 
           {/* ✅ Redirect Button with Same HSL color */}
           <RedirectButton
-            url="https://www.example.com"
-            label="Go to Example"
+            url="https://l.bttr.to/rAyYN"
+            label="Schedule a Coaching Session"
             variant="default"
             className="shadow-sm rounded-lg text-gray-900 hover:opacity-80 transition-colors"
             style={{ backgroundColor: "hsl(190, 45%, 76%)" }} // ✅ Apply custom color
