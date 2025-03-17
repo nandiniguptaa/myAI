@@ -61,6 +61,7 @@ import Image from "next/image";
 import { CHAT_HEADER, CLEAR_BUTTON_TEXT } from "@/configuration/ui";
 import { AI_NAME } from "@/configuration/identity";
 import RedirectButton from "@/components/chat/RedirectButton"; // ✅ Import Redirect Button
+import { useRouter } from "next/router";
 
 export const AILogo = () => (
   <div className="w-12 h-12 relative">
@@ -74,6 +75,8 @@ export default function ChatHeader({
 }: {
   clearMessages: () => void;
 }) {
+  const router = useRouter();
+
   return (
     <div className="z-10 flex justify-center items-center fixed top-0 w-full p-5 bg-white shadow-[0_10px_15px_-3px_rgba(255,255,255,1)]">
       <div className="flex w-full">
@@ -103,6 +106,16 @@ export default function ChatHeader({
             className="shadow-sm rounded-lg text-gray-900 hover:opacity-80 transition-colors"
             style={{ backgroundColor: "hsl(190, 45%, 76%)" }} // ✅ Apply custom color
           />
+
+
+          <Button
+            onClick={() => router.push("/queries")} // ✅ Navigate to queries page
+            className="shadow-sm rounded-lg text-gray-900 hover:opacity-80 transition-colors"
+            variant="default"
+            size="sm"
+            style={{ backgroundColor: "hsl(190, 45%, 76%)", color: "white" }} // ✅ Custom color for visibility
+          />
+            Admin Access
         </div>
       </div>
     </div>

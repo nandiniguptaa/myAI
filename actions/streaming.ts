@@ -12,6 +12,12 @@ import {
 } from "@/types";
 import Anthropic from "@anthropic-ai/sdk";
 
+const userQueries: string[] = []; // Global array to store user queries
+
+export function getUserQueries() {
+  return userQueries; // Function to retrieve stored queries
+}
+
 export interface QueueAssistantResponseParams {
   controller: ReadableStreamDefaultController;
   providers: AIProviders;
@@ -51,6 +57,12 @@ export async function handleOpenAIStream({
       messages,
     });
   }
+  // Extract and store the user's query
+  const userQuery = messages.find((msg) => msg.role === "user")?.content;
+  if (userQuery) {
+  userQueries.push(userQuery);
+  }
+
   const startTime = Date.now();
   const tempResponse = await client.chat.completions.create({
     model: model_name,
@@ -112,6 +124,13 @@ export async function handleAnthropicStream({
       content: msg.content,
     })
   );
+
+  // Extract and store the user's query
+  const userQuery = messages.find((msg) => msg.role === "user")?.content;
+  if (userQuery) {
+    userQueries.push(userQuery);
+  }
+
   let responseBuffer: string = "";
   console.log("Streaming Anthropic response...", {
     temperature,
