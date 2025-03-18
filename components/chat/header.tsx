@@ -106,16 +106,7 @@ export default function ChatHeader({
             className="shadow-sm rounded-lg text-gray-900 hover:opacity-80 transition-colors"
             style={{ backgroundColor: "hsl(190, 45%, 76%)" }} // ✅ Apply custom color
           />
-
-
-          <Button
-            onClick={() => router.push("/queries")} // ✅ Navigate to queries page
-            className="shadow-sm rounded-lg text-gray-900 hover:opacity-80 transition-colors"
-            variant="default"
-            size="sm"
-            style={{ backgroundColor: "hsl(190, 45%, 76%)", color: "white" }} // ✅ Custom color for visibility
-          />
-            Admin Access
+          
         </div>
       </div>
     </div>
